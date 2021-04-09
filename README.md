@@ -11,3 +11,8 @@ to run test
 
 docker-compose run app sh -c "python manage.py test && flake8"
 ./run-test.sh
+
+
+docker-compose run app sh -c "python manage.py startapp core"
+
+docker-compose run app sh -c "python manage.py makemigrations core"
