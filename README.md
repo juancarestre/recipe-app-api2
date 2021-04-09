@@ -8,5 +8,6 @@ source .venv/bin/activate
 pip install -r requirements.txt
 
 to run test
+
 docker-compose run app sh -c "python manage.py test && flake8"
 ./run-test.sh
