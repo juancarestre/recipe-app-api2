@@ -14,8 +14,9 @@ function RunTestAndLint {
 
 function FixLintErrors {
   docker-compose run app sh -c "flake8" | grep .py | while read -r line ; do
-    echo "Fixing lint of $line"
-    docker-compose run app sh -c "autopep8 --in-place $line"
+    file_name=(${line//:/ })
+    echo "Fixing lint of $file_name"
+    docker-compose run app sh -c "autopep8 --in-place $file_name"
   done
 }
 ###
