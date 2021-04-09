@@ -12,6 +12,12 @@ function RunTestAndLint {
     docker-compose run app sh -c "python manage.py test && flake8"
 }
 
+function FixLintErrors {
+  docker-compose run app sh -c "flake8" | grep .py | while read -r line ; do
+    echo "Fixing lint of $line"
+    docker-compose run app sh -c "autopep8 --in-place $line"
+  done
+}
 ###
 
 for arg in "$@"; do
@@ -20,6 +26,9 @@ for arg in "$@"; do
   fi
   if [[ "$arg" = -l ]] || [[ "$arg" = --run-lint ]]; then
     ARG_RUN_LINT=true
+  fi
+  if [[ "$arg" = --fix-lint-errors ]]; then
+    ARG_FIX_LINT_ERRORS=true
   fi
   if [[ "$arg" = -a ]] || [[ "$arg" = --run-all ]]; then
     ARG_RUN_ALL=true
@@ -34,6 +43,10 @@ fi
 
 if [[ "$ARG_RUN_LINT" = true ]]; then
   RunLint
+fi
+
+if [[ "$ARG_FIX_LINT_ERRORS" = true ]]; then
+  FixLintErrors
 fi
 
 if [[ "$ARG_RUN_ALL" = true ]]; then

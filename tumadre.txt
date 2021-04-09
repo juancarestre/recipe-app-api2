@@ -1,0 +1,6 @@
+./core/test/test_admin.py:7:1: W293 blank line contains whitespace
+./core/test/test_admin.py:11:18: E251 unexpected spaces around keyword / parameter equals
+./core/test/test_admin.py:11:20: E251 unexpected spaces around keyword / parameter equals
+./core/test/test_admin.py:11:60: E251 unexpected spaces around keyword / parameter equals
+./core/test/test_admin.py:11:62: E251 unexpected spaces around keyword / parameter equals
+./core/test/test_admin.py:40:47: W292 no newline at end of file
