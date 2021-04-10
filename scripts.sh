@@ -1,25 +1,20 @@
 #!/bin/bash
 
 function RunTests {
-    docker-compose run app sh -c "python manage.py test"
+    docker-compose run --rm app sh -c "python manage.py test"
 }
 
 function RunLint {
-    docker-compose run app sh -c "flake8"
+    docker-compose run --rm app sh -c "flake8"
 }
 
 function RunTestAndLint {
-    docker-compose run app sh -c "python manage.py test && flake8"
+    docker-compose run --rm app sh -c "python manage.py test && flake8"
 }
 
 function FixLintErrors {
-  docker-compose run app sh -c "flake8" | grep .py | while read -r line ; do
-    file_name=(${line//:/ })
-    echo "Fixing lint of $file_name"
-    docker-compose run app sh -c "autopep8 --in-place $file_name"
-  done
+  docker-compose run --rm app sh -c "autopep8 --in-place --recursive ."
 }
-###
 
 for arg in "$@"; do
   if [[ "$arg" = -t ]] || [[ "$arg" = --run-test ]]; then
