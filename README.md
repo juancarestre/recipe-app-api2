@@ -16,3 +16,8 @@ docker-compose run app sh -c "python manage.py test && flake8"
 docker-compose run app sh -c "python manage.py startapp core"
 
 docker-compose run app sh -c "python manage.py makemigrations core"
+
+
+REDIS
+docker container exec -it <contid> sh -c "redis-cli"
+EVAL "return redis.call('del', unpack(redis.call('keys', ARGV[1])))" 0 pattern*

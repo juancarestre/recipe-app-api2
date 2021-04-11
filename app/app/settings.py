@@ -127,3 +127,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'core.User'
+
+REDIS_HOST: os.environ.get('REDIS_HOST')
+REDIS_PORT: os.environ.get('REDIS_PORT')
