@@ -56,7 +56,7 @@ class IngredientViewSet(viewsets.GenericViewSet,
             ingredients = self.queryset.filter(
                 user=self.request.user).order_by('-name')
             ingredients_to_cache = f'{list(ingredients.values())}'
-            redis_instance.setex(f'ingredientsx:{self.request.user.email}', 15,
+            redis_instance.setex(f'ingredientsx:{self.request.user.email}', 60,
                                  json.dumps(ingredients_to_cache))
         else:
             print('in cache')
